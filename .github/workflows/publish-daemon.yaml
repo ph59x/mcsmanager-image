@@ -36,7 +36,7 @@ jobs:
         id: docker-meta
         uses: docker/metadata-action@v4
         with:
-          images: docker.io/alisaqaq/mcsmanager-daemon
+          images: docker.io/pH59x/mcsmanager-daemon
           tags: |
             type=semver,pattern={{version}},value=${{ steps.getversion.outputs.version }}
             type=semver,pattern={{major}}.{{minor}},value=${{ steps.getversion.outputs.version }}
