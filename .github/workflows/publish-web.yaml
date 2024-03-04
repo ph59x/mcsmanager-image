@@ -20,6 +20,7 @@ jobs:
       -
         name: Get tags
         id: tag
+        uses: docker/metadata-action@v4
         with:
           images: ph59x/mcsmanager-web
           tags: |
