@@ -1,9 +1,10 @@
 name: ci
 
 on:
-  push:
-    paths:
-      - 'release-versions/mcsm-version-web.txt'
+  workflow_dispatch:
+  # push:
+  #   paths:
+  #     - 'release-versions/mcsm-version-web.txt'
 
 jobs:
   docker:
