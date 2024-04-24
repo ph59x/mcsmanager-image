@@ -1,6 +1,17 @@
 FROM node:20-alpine
 
-RUN apk --no-cache add git && git clone https://github.com/pH59x/MCSManager-Daemon-Production /opt/mcsmanager/daemon --depth=1 && cd /opt/mcsmanager/daemon && npm install --omit=dev && npm cache clean --force && apk del git && mkdir -p /opt/mcsmanager/daemon/data
+RUN apk --no-cache add wget && \ 
+    mkdir -p /opt/mcsmanager && cd /opt/mcsmanager && \
+    wget https://github.com/MCSManager/MCSManager/releases/latest/download/mcsmanager_linux_release.tar.gz && \
+    tar -zxf mcsmanager_linux_release.tar.gz && \
+    cd ./daemon && \
+    npm install --omit=dev && \
+    npm cache clean --force && \ 
+    cd ../ && \
+    rm ./mcsmanager_linux_release.tar.gz ./*.sh ./*.md && \
+    rm -rf ./web && \
+    apk del wget && \
+    mkdir -p ./daemon/data 
 
 ENV TZ=Asia/Shanghai
 

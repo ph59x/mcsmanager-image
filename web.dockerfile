@@ -1,6 +1,17 @@
 FROM node:20-alpine
 
-RUN apk --no-cache add git && git clone https://github.com/pH59x/MCSManager-Web-Production /opt/mcsmanager/web --depth=1 && cd /opt/mcsmanager/web && npm install --omit=dev && npm cache clean --force && apk del git && mkdir -p /opt/mcsmanager/web/data
+RUN apk --no-cache add wget && \ 
+    mkdir -p /opt/mcsmanager && cd /opt/mcsmanager && \
+    wget https://github.com/MCSManager/MCSManager/releases/latest/download/mcsmanager_linux_release.tar.gz && \
+    tar -zxf mcsmanager_linux_release.tar.gz && \
+    cd ./web && \
+    npm install --omit=dev && \
+    npm cache clean --force && \ 
+    cd ../ && \
+    rm ./mcsmanager_linux_release.tar.gz ./*.sh ./*.md && \
+    rm -rf ./daemon && \
+    apk del wget && \
+    mkdir -p ./web/data 
 
 ENV TZ=Asia/Shanghai
 
